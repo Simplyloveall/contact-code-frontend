@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import Username from "../components/Username";
+import React from "react";
+import ContactCode from "../components/ContactCode";
+import FirstName from "../components/FirstName";
+import LastName from "../components/LastName";
 import Email from "../components/Email";
 import Password from "../components/Password";
 import ConfirmPassword from "../components/ConfirmPassword";
@@ -7,7 +9,9 @@ import { post } from "../authService/authService";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  let [username, setUsername] = React.useState("");
+  let [contactCode, setContactCode] = React.useState("");
+  let [firstName, setFirstName] = React.useState("");
+  let [lastName, setLastName] = React.useState("");
   let [email, setEmail] = React.useState("");
   let [password, setPassword] = React.useState("");
   let [confirmPassword, setConfirmPassword] = React.useState("");
@@ -20,8 +24,8 @@ const Signup = () => {
 
   function checkError(e) {
     e.preventDefault();
-    if (username.length < 4) {
-      setErrormessage("username must be at least four characters");
+    if (contactCode.length !== 10) {
+      setErrormessage("contact-code must be ten characters");
     } else if (password.length < 6) {
       setErrormessage("password must be at least 6 characters");
     } else if (password === "password") {
@@ -31,10 +35,13 @@ const Signup = () => {
     } else if (!regexExp.test(email)) {
       setErrormessage("that is not a valid email address");
     } else {
-      setErrormessage(`Welcome ${username}!`);
+      setErrormessage(`Welcome ${firstName} ${lastName}!`);
       post("/users/signup", {
-        username: username,
+        contactCode: contactCode,
+        email: email,
         password: password,
+        firstName: firstName,
+        lastName: lastName,
       })
         .then((results) => {
           console.log("Results", results.data.token);
@@ -42,7 +49,8 @@ const Signup = () => {
           navigate("/");
         })
         .catch((err) => {
-          console.log("Something went wrong", err.message);
+          console.log("Something went wrong", err.response.data.message);
+          setErrormessage(err.response.data.message);
         });
     }
   }
@@ -50,11 +58,12 @@ const Signup = () => {
   return (
     <div>
       <form onSubmit={checkError}>
-        <Username setUsername={setUsername} />
+        <ContactCode setContactCode={setContactCode} />
         <Email setEmail={setEmail} />
         <Password setPassword={setPassword} />
         <ConfirmPassword setConfirmPassword={setConfirmPassword} />
-
+        <FirstName setFirstName={setFirstName} />
+        <LastName setLastName={setLastName} />
         <button>Submit</button>
 
         <p>{errormessage}</p>
