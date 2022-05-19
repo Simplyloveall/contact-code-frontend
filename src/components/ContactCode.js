@@ -10,7 +10,7 @@ const ContactCode = (props) => {
         onChange={(e) => props.setContactCode(e.target.value)}
         value={props.contactCode}
         maxlength="10"
-        onInput={(e) => (e.target.value = ("" + e.target.value).toUpperCase())}
+        onInput={(e) => (e.target.value = "" + e.target.value)}
       />
     </div>
   );

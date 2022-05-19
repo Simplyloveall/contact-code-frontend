@@ -7,6 +7,9 @@ import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import DeleteProfile from "./pages/DeleteProfile";
+import ContactCard from "./components/ContactCard";
+import AddFriend from "./pages/AddFriend";
+import MessageForm from "./components/MessageForm";
 
 function App() {
   const navigate = useNavigate();
@@ -27,6 +30,8 @@ function App() {
             <Link to="/">Home</Link>
             <Link to="/edit-profile">Edit Profile</Link>
             <Link to="/delete-profile">Delete Profile</Link>
+            <Link to="/contact-card">My Contact Card</Link>
+            <Link to="/add-friend">Add Friend</Link>
 
             <button onClick={logout}>log out</button>
           </nav>
@@ -45,7 +50,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/edit-profile" element={<Profile />} />
         <Route path="/delete-profile" element={<DeleteProfile />} />
-
+        <Route path="/contact-card" element={<ContactCard />} />
+        <Route path="/add-friend" element={<AddFriend />} />
+        <Route path="/send-message/:userid" element={<MessageForm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
