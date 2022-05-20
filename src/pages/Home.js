@@ -49,16 +49,12 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <h1>This is Home</h1>
-      <textarea placeholder="start writing your message here..."></textarea>
-      <br />
-      <button>Send</button>
+    <div className="container">
+      <h1>Connecting made easy</h1>
 
       <p>New invitations to connect</p>
       <img src={user.friend} />
 
-      <p>{user.firstName}</p>
       {user.friendRequest?.map(function (friend) {
         return (
           <FriendRequestCard
@@ -68,18 +64,22 @@ const Home = () => {
           />
         );
       })}
-
+      <hr />
       <div>
-        <p>{user.firstName}'s Friends</p>
         <p>
           {user.friends?.map(function (friend) {
             return (
               <div>
-                <p>{friend.firstName}</p>
-                <p>{friend.lastName}</p>
-                <p>{friend.email}</p>
-                <p>{friend.phone}</p>
-                <Link to={`/send-message/${friend._id}`}>Message</Link>
+                <p>Friend's contact-code: {friend.contactCode}</p>
+                <img src={friend.profilePicture} width="200" />
+                <p> First Name: {friend.firstName}</p>
+                <p>Last Name: {friend.lastName}</p>
+                <p>Email: {friend.email}</p>
+                <p>Phone: {friend.phone}</p>
+                <Link to={`/send-message/${friend._id}`}>
+                  Send {friend.firstName} a message
+                </Link>
+                <hr />
               </div>
             );
           })}

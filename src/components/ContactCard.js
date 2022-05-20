@@ -16,10 +16,10 @@ const ContactCard = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h1>This is {user.firstName}'s Contact Card</h1>
       <p>contact-code: {user.contactCode}</p>
-      <img src={user.profilePicture} width="50" />
+      <img src={user.profilePicture} width="200" />
 
       <p>{user.firstName}</p>
       <p>{user.lastName}</p>
@@ -29,9 +29,7 @@ const ContactCard = (props) => {
       <p>{user.city}</p>
       <p>{user.state}</p>
       <p>{user.country}</p>
-      <p>{user.primaryChat}</p>
-
-      <p>{user.friends}</p>
+      <hr />
     </div>
   );
 };

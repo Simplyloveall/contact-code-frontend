@@ -19,7 +19,7 @@ function MessageForm() {
   }
 
   return (
-    <div>
+    <div className="container">
       <h2>send the message</h2>
       <form onSubmit={sendMessage}>
         <label>Type your message here</label>

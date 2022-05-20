@@ -56,7 +56,7 @@ const Signup = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={checkError}>
         <ContactCode setContactCode={setContactCode} />
         <Email setEmail={setEmail} />

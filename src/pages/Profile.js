@@ -1,10 +1,14 @@
 import React from "react";
 import { post, get } from "../authService/authService";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = React.useState({});
-  const [name, setName] = React.useState("");
-  const [image, setImage] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  // const [name, setName] = React.useState("");
+  // const [image, setImage] = React.useState("");
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     get("/users/profile-info")
@@ -17,6 +21,7 @@ const Profile = () => {
   }, []);
 
   function handleFileUpload(e) {
+    setIsLoading(true);
     //create FormData
 
     const uploadData = new FormData();
@@ -26,7 +31,8 @@ const Profile = () => {
     post("/users/image-upload", uploadData)
       .then((results) => {
         console.log("This is the image path", results.data);
-        setUser({ ...user, image: results.data });
+        setUser({ ...user, profilePicture: results.data });
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log("Error", err.message);
@@ -39,6 +45,7 @@ const Profile = () => {
     post("/users/edit", user)
       .then((results) => {
         console.log("Results", results.data);
+        navigate("/");
       })
       .catch((err) => {
         console.log("Error", err.message);
@@ -46,7 +53,7 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <h2>Update your profile</h2>
       <h3>
         Welcome {user.firstName}, your contact code is {user.contactCode}
@@ -60,6 +67,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Last Name</label>
         <input
           name="lastName"
@@ -68,6 +76,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Email</label>
         <input
           name="email"
@@ -76,6 +85,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Phone Number</label>
         <input
           name="phone"
@@ -84,6 +94,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Address - street</label>
         <input
           name="street"
@@ -92,6 +103,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Address - City</label>
         <input
           name="city"
@@ -100,6 +112,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Address - State</label>
         <input
           name="state"
@@ -108,6 +121,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Address - ZipCode</label>
         <input
           name="zipCode"
@@ -116,6 +130,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Address - Country</label>
         <input
           name="country"
@@ -124,6 +139,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Primary Chat</label>
         <input
           name="primaryChatName"
@@ -132,6 +148,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Link to Chat</label>
         <input
           name="primaryChatLink"
@@ -140,6 +157,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Primary Social</label>
         <input
           name="primarySocialName"
@@ -148,6 +166,7 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
         <label>Link to Social</label>
 
         <input
@@ -157,11 +176,18 @@ const Profile = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
           }
         />
+        <br />
 
-        <label>Image</label>
+        <label>Change Your Profile Picture</label>
         <input type="file" onChange={(e) => handleFileUpload(e)}></input>
-        <button type="submit">Update Profile</button>
+        <br />
+
+        <button type="submit" disabled={isLoading}>
+          Update Profile
+        </button>
       </form>
+
+      <a href="/delete-profile">Delete Profile</a>
     </div>
   );
 };

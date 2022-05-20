@@ -10,12 +10,13 @@ import DeleteProfile from "./pages/DeleteProfile";
 import ContactCard from "./components/ContactCard";
 import AddFriend from "./pages/AddFriend";
 import MessageForm from "./components/MessageForm";
+import Navbar from "./components/Navbar";
+import "./App.css";
 
 function App() {
   const navigate = useNavigate();
 
   let token = localStorage.getItem("authToken");
-  console.log("TOKEN", token);
 
   function logout() {
     localStorage.clear();
@@ -24,7 +25,11 @@ function App() {
 
   return (
     <div>
-      <header>
+      <Navbar token={token} logout={logout} />
+
+      {/* <button onClick={logout}>log out</button> */}
+
+      {/* <header>
         {token ? (
           <nav>
             <Link to="/">Home</Link>
@@ -42,7 +47,7 @@ function App() {
             <Link to="/login">Log in</Link>
           </nav>
         )}
-      </header>
+      </header> */}
 
       <Routes>
         <Route path="/" element={<Home />} />

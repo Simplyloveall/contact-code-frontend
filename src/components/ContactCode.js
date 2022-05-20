@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactCode = (props) => {
   return (
-    <div>
+    <div className="container">
       <h1>This is ContactCode</h1>
       <label>ContactCode</label>
       <input

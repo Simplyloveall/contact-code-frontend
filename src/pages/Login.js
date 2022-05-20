@@ -34,9 +34,9 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={submitLogin}>
-        <h1>This is Login</h1>
+        <h1>Log-in here</h1>
         <ContactCode setContactCode={setContactCode} />
         <Password setPassword={setPassword} />
         <button>Log-in</button>

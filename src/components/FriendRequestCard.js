@@ -8,7 +8,7 @@ const FriendRequestCard = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="container">
       <div>{props.friend.firstName} wants to connect</div>
       <button onClick={() => props.acceptFriend(props.friend._id)}>
         accept
