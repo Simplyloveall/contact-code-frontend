@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const [user, setUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
+
+  //NOTE: if you aren't using these hooks, remove them.
   // const [name, setName] = React.useState("");
   // const [image, setImage] = React.useState("");
 
@@ -16,6 +18,7 @@ const Profile = () => {
         setUser(results.data);
       })
       .catch((err) => {
+        //NOTE: replace this with some kind of setErrorMessage() hook to better explain the issue to the user
         console.log("error", err.mesasge);
       });
   }, []);
@@ -30,6 +33,7 @@ const Profile = () => {
 
     post("/users/image-upload", uploadData)
       .then((results) => {
+        //NOTE: remove console.log()
         console.log("This is the image path", results.data);
         setUser({ ...user, profilePicture: results.data });
         setIsLoading(false);
@@ -44,10 +48,12 @@ const Profile = () => {
 
     post("/users/edit", user)
       .then((results) => {
+        //NOTE: remove console.log()
         console.log("Results", results.data);
         navigate("/");
       })
       .catch((err) => {
+        //NOTE: replace this with some kind of setErrorMessage() hook to better explain the issue to the user
         console.log("Error", err.message);
       });
   }

@@ -22,11 +22,13 @@ const Login = () => {
         password: password,
       })
         .then((results) => {
+          //NOTE: remove console.log()
           console.log("Results", results.data);
           localStorage.setItem("authToken", results.data.token);
           navigate("/");
         })
         .catch((err) => {
+          //NOTE: remove console.log()
           console.log("Something went wrong", err.response.data.message);
           setErrormessage(err.response.data.message);
         });

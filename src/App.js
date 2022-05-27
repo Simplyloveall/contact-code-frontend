@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+//NOTE: remove LINK if it is no longer being used
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -26,6 +27,8 @@ function App() {
   return (
     <div>
       <Navbar token={token} logout={logout} />
+
+      {/* NOTE: Remove commented out code */}
 
       {/* <button onClick={logout}>log out</button> */}
 

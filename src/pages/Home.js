@@ -19,6 +19,7 @@ const Home = () => {
         setUser(results.data);
       })
       .catch((err) => {
+        //NOTE: replace this with some kind of setErrorMessage() hook to better explain the issue to the user
         console.log(err.message);
       });
   }
@@ -27,11 +28,13 @@ const Home = () => {
     console.log("ID", id);
     post(`/users/${id}/accept`)
       .then((results) => {
+        //NOTE: remove commented out code
         // setFriends(results);
         // navigate("/");
         testLogin();
       })
       .catch((err) => {
+        //NOTE: replace this with some kind of setErrorMessage() hook to better explain the issue to the user
         console.log("Something went wrong", err.message);
       });
   }

@@ -26,6 +26,7 @@ const DeleteProfile = () => {
           navigate("/");
         })
         .catch((err) => {
+          //NOTE: replace this with some kind of setErrorMessage() hook to better explain the issue to the user
           console.log("Something went wrong", err.message);
         });
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import { get } from "../authService/authService";
-
+//NOTE: remove props if it isn't being used
 const ContactCard = (props) => {
   const [user, setUser] = React.useState({});
 

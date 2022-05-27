@@ -2,6 +2,8 @@ import React from "react";
 import { get, post } from "../authService/authService";
 import { useNavigate } from "react-router-dom";
 
+//NOTE: remove props if you aren't using it
+
 function AddFriend(props) {
   const [code, setCode] = React.useState("");
   const [user, setUser] = React.useState([]);
@@ -15,10 +17,12 @@ function AddFriend(props) {
   function testLogin() {
     get("/users/login-test")
       .then((results) => {
+        //NOTE: remove console.log()
         console.log("Are we logged in", results.data);
         setUser(results.data);
       })
       .catch((err) => {
+        //NOTE: replace this with some kind of setErrorMessage() hook to better explain the issue to the user
         console.log(err.message);
       });
   }
